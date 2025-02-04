@@ -39,20 +39,20 @@ async function bootstrap() {
   // Graceful startup with dynamic port configuration
   const port = process.env.PORT || 3000;
   await app.listen(port, '0.0.0.0'); // Use '0.0.0.0' to ensure it binds on all network interfaces
-  console.log(`Application is running on: ${await app.getUrl()}`);
-  console.log(`API documentation available at: ${await app.getUrl()}/api-docs`);
+  // console.log(`Application is running on: ${await app.getUrl()}`);
+  // console.log(`API documentation available at: ${await app.getUrl()}/api-docs`);
 }
 
-// Global exception handling for critical errors
-process.on('uncaughtException', (err) => {
-  console.error('Uncaught Exception:', err);
-  process.exit(1); // Exit to avoid unstable state
-});
+// // Global exception handling for critical errors
+// process.on('uncaughtException', (err) => {
+//   console.error('Uncaught Exception:', err);
+//   process.exit(1); // Exit to avoid unstable state
+// });
 
-process.on('unhandledRejection', (reason) => {
-  console.error('Unhandled Rejection:', reason);
-  // Optionally log additional details or send alerts
-});
+// process.on('unhandledRejection', (reason) => {
+//   console.error('Unhandled Rejection:', reason);
+//   // Optionally log additional details or send alerts
+// });
 
 bootstrap();
 
