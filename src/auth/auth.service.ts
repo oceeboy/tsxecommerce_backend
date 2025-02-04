@@ -44,7 +44,7 @@ export class AuthService {
   async registerUser(
     registerUser: RegisterUserDto,
   ): Promise<{ message: string }> {
-    const { email, password, ...rest } = registerUser;
+    const { email, password, firstName, ...rest } = registerUser;
 
     // Check if email already exists
     const existingUser = await this.userModel.findOne({ email });
@@ -71,7 +71,9 @@ export class AuthService {
 
     await newUser.save();
 
-    return { message: `Successfully registered Otp- ${otpCode}` };
+    await this.emailService.SendOtpEmailForToken(email, firstName, otpCode);
+
+    return { message: `Successfully registered` };
   }
 
   // User Login
