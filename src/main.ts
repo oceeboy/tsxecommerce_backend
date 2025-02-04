@@ -41,6 +41,10 @@ async function bootstrap() {
   await app.listen(port, '0.0.0.0'); // Use '0.0.0.0' to ensure it binds on all network interfaces
   // console.log(`Application is running on: ${await app.getUrl()}`);
   // console.log(`API documentation available at: ${await app.getUrl()}/api-docs`);
+
+  // setInterval(() => {
+  //   console.log(process.memoryUsage());
+  // }, 10000);
 }
 
 // // Global exception handling for critical errors
