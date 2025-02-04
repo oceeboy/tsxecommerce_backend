@@ -64,6 +64,7 @@ export class AuthService {
     const newUser = new this.userModel({
       ...rest,
       email,
+      firstName,
       password: hashedPassword,
       otp: otpCode,
       otpExpiration: new Date(Date.now() + 10 * 60 * 1000),
