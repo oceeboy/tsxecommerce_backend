@@ -4,7 +4,8 @@ import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from './schemas/user..schema';
-import { EmailModule } from 'src/email/email.module';
+import { EmailModule } from '../email/email.module';
+import { ProductModule } from '../product/product.module';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
@@ -15,8 +16,10 @@ import { EmailModule } from 'src/email/email.module';
       signOptions: { expiresIn: '3h' },
     }),
     forwardRef(() => EmailModule),
+    forwardRef(() => ProductModule),
   ],
   providers: [AuthService],
   controllers: [AuthController],
+  exports: [JwtModule],
 })
 export class AuthModule {}

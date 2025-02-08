@@ -12,7 +12,7 @@ import { JwtService } from '@nestjs/jwt';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import { VerifyOtpDtoMain } from './dto/verify-otp-main.dto';
-import { EmailService } from 'src/email/email.service';
+import { EmailService } from '../email/email.service';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { VerifyOtpDto } from './dto/verify-otp-password.dto';
 import { GenerateNewOtp } from './dto/generate-otp';
@@ -104,7 +104,7 @@ export class AuthService {
 
     await this.emailService.SendOtpEmailForToken(email, user.firstName, otp);
 
-    return { message: `Check email to verify OTP, ${user}` };
+    return { message: `Check email to verify OTP` };
   }
 
   async validateUser(validateOtp: VerifyOtpDtoMain): Promise<{
@@ -146,6 +146,7 @@ export class AuthService {
     }
 
     // this Generates a 6-digit OTP
+
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
     user.otp = otp;
