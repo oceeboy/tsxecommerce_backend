@@ -16,7 +16,7 @@ import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { VerifyOtpDto } from './dto/verify-otp-password.dto';
 import { GenerateNewOtp } from './dto/generate-otp';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
-import { AuthGuard } from 'src/common/guards/auth.guard';
+import { AuthGuard } from '../common/guards/auth.guard';
 
 @Controller('auth')
 export class AuthController {
