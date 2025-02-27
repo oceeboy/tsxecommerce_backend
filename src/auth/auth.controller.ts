@@ -1,4 +1,12 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Req,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { RegisterUserDto } from './dto/register-user.dto';
@@ -8,6 +16,7 @@ import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { VerifyOtpDto } from './dto/verify-otp-password.dto';
 import { GenerateNewOtp } from './dto/generate-otp';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
+import { AuthGuard } from '../common/guards/auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -183,5 +192,12 @@ export class AuthController {
   })
   async refreshToken(@Body() refreshTokenDto: RefreshTokenDto) {
     return await this.authService.refreshAccessToken(refreshTokenDto);
+  }
+
+  @Get('profile')
+  @UseGuards(AuthGuard)
+  async profile(@Req() req) {
+    console.log(req.user);
+    return await this.authService.userData(req.user.sub);
   }
 }

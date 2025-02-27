@@ -237,4 +237,9 @@ export class AuthService {
       throw new UnauthorizedException('Invalid or expired refresh token');
     }
   }
+
+  async userData(_id: string) {
+    const user = await this.userModel.findById(_id);
+    return user;
+  }
 }
