@@ -18,5 +18,6 @@ import { AuthModule } from '../auth/auth.module';
   ],
   providers: [ProductService, Cloudinary],
   controllers: [ProductController],
+  exports: [ProductService],
 })
 export class ProductModule {}
