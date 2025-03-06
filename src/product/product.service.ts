@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ProductDocument } from './schemas/product.schema';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 @Injectable()
 export class ProductService {
@@ -254,14 +254,19 @@ export class ProductService {
 
     // Check if the user has already reviewed the product
     const existingReview = product.reviews.find(
-      (review) => review.userId === userId,
+      (review) => review.userId.toString() === userId,
     );
     if (existingReview) {
       throw new BadRequestException('You have already reviewed this product');
     }
 
     // Add the review
-    product.reviews.push({ userId, rating, comment, createdAt: new Date() });
+    product.reviews.push({
+      userId: new Types.ObjectId(userId),
+      rating,
+      comment,
+      createdAt: new Date(),
+    });
     await product.save();
 
     return { message: 'Review added successfully' };
@@ -278,7 +283,7 @@ export class ProductService {
 
     // Filter out the user's review
     const newReviews = product.reviews.filter(
-      (review) => review.userId !== userId,
+      (review) => review.userId.toString() !== userId,
     );
 
     // If no review was removed, return an error

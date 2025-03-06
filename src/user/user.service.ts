@@ -14,4 +14,8 @@ export class UserService {
   async getUserById(userId: string) {
     return await this.userModel.findById(userId).select('-password');
   }
+
+  async validateUserById(userId: string) {
+    return await this.userModel.findById(userId);
+  }
 }

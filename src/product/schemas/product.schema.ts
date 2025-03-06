@@ -1,7 +1,7 @@
 import { Schema, Types } from 'mongoose';
 
 export interface Review {
-  userId: string;
+  userId: Types.ObjectId;
   rating: number;
   comment: string;
   createdAt: Date;
