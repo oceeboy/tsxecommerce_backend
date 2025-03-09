@@ -82,6 +82,8 @@ export class ProductService {
       );
     }
 
+    product.sku = this.generateSku(updateProductDto.productName);
+
     // Merge updates and save
     Object.assign(product, updateProductDto);
     await product.save();

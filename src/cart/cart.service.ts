@@ -9,7 +9,7 @@ import { CartDocument } from './schemas/cart.schema';
 
 import { ProductDocument } from '../product/schemas/product.schema';
 
-import { UserService } from 'src/user/user.service';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class CartService {
